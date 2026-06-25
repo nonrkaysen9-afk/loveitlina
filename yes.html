@@ -15,7 +15,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* Блюр-слой */
+    /* Блюр-слой (завеса) */
     .blur-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -119,8 +119,9 @@
     <span class="small-hint">Нажми, чтобы увидеть всё</span>
   </div>
 
-  <!-- Кот на фоне (без alert, чтобы не ломать эффект) -->
+  <!-- Кот на фоне -->
   <div class="cat-background">
+    <!-- Если картинки нет, она просто исчезнет, не ломая страницу -->
     <img src="cat.gif" alt="кот" onerror="this.style.display='none';">
   </div>
 
@@ -133,6 +134,7 @@
 
   <!-- Музыка -->
   <audio id="music" loop>
+    <!-- Имя файла должно ТОЧНО совпадать с тем, что на скриншоте -->
     <source src="hapi-hapi-hapi.mp3" type="audio/mpeg">
   </audio>
 
@@ -145,15 +147,11 @@
     // Вешаем событие ТОЛЬКО на кнопку "ТЫК"
     btn.addEventListener('click', () => {
       if (!isPlaying) {
-        // Пытаемся запустить музыку
         audio.play().then(() => {
           isPlaying = true;
-          // Если музыка пошла — убираем блюр
           blur.classList.add('hidden');
         }).catch(e => {
-          // Если браузер всё равно заблокировал звук (редко, но бывает) —
-          // всё равно убираем блюр, чтобы человек видел контент
-          console.error('Звук заблокирован браузером:', e);
+          console.error('Звук заблокирован браузером или файл не найден:', e);
           blur.classList.add('hidden');
         });
       }
