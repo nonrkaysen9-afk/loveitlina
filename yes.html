@@ -15,7 +15,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* Слой с эффектом размытия */
     .blur-overlay {
       position: fixed;
       top: 0;
@@ -53,7 +52,6 @@
       color: #888;
     }
 
-    /* Кот на фоне */
     .cat-background {
       position: fixed;
       bottom: -30px;
@@ -72,7 +70,6 @@
       display: block;
     }
 
-    /* Контент по центру */
     .content {
       position: absolute;
       top: 50%;
@@ -110,28 +107,28 @@
 </head>
 <body>
 
-  <!-- Блюр с призывом к действию -->
   <div class="blur-overlay" id="blur">
     <span class="big-click-text">ТЫК</span>
     <span class="small-hint">Нажми, чтобы увидеть всё</span>
   </div>
 
-  <!-- Кот на фоне -->
+  <!-- Кот (ошибка убрана, если картинки нет — просто ничего не будет) -->
   <div class="cat-background">
-    <img src="cat.gif" alt="кот" onerror="this.style.display='none'; alert('Не найден файл cat.gif! Проверь название и регистр букв.');">
+    <img src="cat.gif" alt="кот">
   </div>
 
-  <!-- Контент по центру -->
   <div class="content">
     <h1>Ура! 🎉</h1>
     <p class="main-message">Спасибо, что выбрала «Да», я тебя лублу 👉👈❤</p>
     <p class="tg-hint">Напиши свой ответ мне в Telegram</p>
   </div>
 
-  <!-- Музыка -->
+  <!-- Музыка (закомментирована, чтобы не было ошибки 404, если файла нет) -->
+  <!-- 
   <audio id="music" loop>
     <source src="hapi-hapi-hapi.mp3" type="audio/mpeg">
-  </audio>
+  </audio> 
+  -->
 
   <script>
     const blur = document.getElementById('blur');
@@ -139,7 +136,7 @@
     let isPlaying = false;
 
     document.addEventListener('click', () => {
-      if (!isPlaying) {
+      if (!isPlaying && audio) {
         audio.play().then(() => {
           isPlaying = true;
           blur.classList.add('hidden');
@@ -147,6 +144,8 @@
           console.error('Ошибка автовоспроизведения:', e);
           blur.classList.add('hidden');
         });
+      } else {
+        blur.classList.add('hidden');
       }
     });
   </script>
