@@ -3,76 +3,109 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ТЫК</title>
+    <title>ТЫК для Лины</title>
     <style>
       body {
         margin: 0;
         padding: 0;
-        height: 100vh;
+        /* Твой красивый градиент из старого кода */
+        background: radial-gradient(circle at center, #fff0f5 0%, #ffffff 100%);
+        color: #333;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #f5f5f5;
-        font-family: Arial, sans-serif;
-        overflow: hidden;
-      }
-      .container {
+        min-height: 100vh;
         text-align: center;
-        z-index: 1;
-        position: relative;
-      }
-      h1 {
-        color: #ff4757;
-        font-size: 100px;
-        margin: 0;
-        line-height: 1;
-      }
-      p {
-        color: #57606f;
-        font-size: 18px;
-        margin-top: 10px;
-      }
-      .cat-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         overflow: hidden;
+        transition: filter 0.5s ease; /* Плавный блюр */
       }
-      .cat-background img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+
+      /* Контейнер теперь работает как большая кнопка */
+      .container {
+        max-width: 500px;
+        width: 90%;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+        position: relative;
+        z-index: 10;
+        cursor: pointer; /* Показываем, что можно нажать */
+        transition: transform 0.2s ease;
+      }
+
+      .container:hover {
+        transform: scale(1.02);
+      }
+
+      .container:active {
+        transform: scale(0.98);
+      }
+
+      h1 {
+        color: #ff4d6d;
+        font-size: 3rem; /* Увеличил "ТЫК", чтобы было заметно */
+        margin: 0 0 1rem 0;
+        line-height: 1;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      p {
+        color: #555;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        margin: 0 0 2rem 0;
+      }
+
+      .hint-text {
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+        color: #888;
+        font-weight: 500;
+      }
+
+      /* Эффект затемнения при клике */
+      body.blurred {
+        filter: blur(8px);
+        background: #000; /* Фон становится черным для контраста */
+      }
+
+      /* Чтобы контент оставался четким, пока фон размыт */
+      body.blurred .container {
+        background: rgba(255, 255, 255, 0.99);
+        box-shadow: 0 0 50px rgba(0,0,0,0.5);
       }
     </style>
   </head>
   <body>
-    <!-- Фон с котом -->
-    <div class="cat-background">
-      <img src="cat.gif" alt="кот" />
-    </div>
-
-    <!-- Текст -->
-    <div class="container">
+    <div class="container" id="trigger-btn">
       <h1>ТЫК</h1>
-      <p>Нажми, чтобы увидеть всё</p>
+      
+      <p>❤️</p>
+      <p>Лина, я вспомнил, как тебя зовут. Ты красивая, милая девушка. Мне нравится с тобой общаться, дружить. Твой голос — шедевр, ты лучшая! И я хочу сказать: ты мне нравишься. Хочу спросить: будешь со мной встречаться?</p>
+      
+      <p class="hint-text">Нажми, чтобы увидеть всё</p>
     </div>
-
-    <!-- Музыка отключена -->
-    <!-- 
-    <audio id="music" loop>
-      <source src="hapi-hapi-hapi.mp3" type="audio/mpeg" />
-    </audio> 
-    -->
 
     <script>
-      console.log("Страница загружена без ошибок");
+      const btn = document.getElementById('trigger-btn');
+      const body = document.body;
+
+      btn.addEventListener('click', () => {
+        // Добавляем класс, который включает блюр и затемнение
+        body.classList.add('blurred');
+        
+        // Меняем текст на кнопке после клика (опционально)
+        const h1 = btn.querySelector('h1');
+        h1.textContent = 'СЕЙЧАС';
+        
+        console.log('Эффект активирован!');
+        
+        // Тут можно добавить переход на другую страницу или показать скрытый контент
+        // Например: setTimeout(() => { window.location.href = 'yes.html'; }, 2000);
+      });
     </script>
   </body>
 </html>
